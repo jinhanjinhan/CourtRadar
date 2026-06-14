@@ -149,12 +149,12 @@ That means the backend already has the foundation for the real production pipeli
 ## ⚙️ Environment Variables
 Copy [.env.example](.env.example) to `.env` when you start wiring real services.
 
-* `DATABASE_URL` - PostgreSQL connection string.
+* `DATABASE_URL` - PostgreSQL connection string. This is required.
 * `REDIS_URL` - Redis connection string.
 * `TELEGRAM_API_ID`, `TELEGRAM_API_HASH`, `TELEGRAM_BOT_TOKEN` - Telegram integrations.
 * `GEMINI_API_KEY` - Gemini parser access.
 
-Right now the backend can boot without these secrets because the settings are optional.
+Most of the service-specific secrets are optional for local startup, but `DATABASE_URL` is required because the app needs a database connection.
 
 ## 🗺️ Implementation Steps
 
