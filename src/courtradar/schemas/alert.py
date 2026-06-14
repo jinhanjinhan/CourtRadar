@@ -1,8 +1,25 @@
-from pydantic import BaseModel
+from datetime import time
+from typing import Optional
+
+from pydantic import BaseModel, ConfigDict
 
 
-class AlertPreference(BaseModel):
-    venue: str | None = None
-    earliest_time: str | None = None
-    latest_time: str | None = None
-    max_price: float | None = None
+class AlertPreferenceBase(BaseModel):
+    user_id: int
+    venue: Optional[str] = None
+    earliest_time: Optional[time] = None
+    latest_time: Optional[time] = None
+    max_price: Optional[float] = None
+
+
+class AlertPreferenceCreate(AlertPreferenceBase):
+    pass
+
+
+class AlertPreferenceRead(AlertPreferenceBase):
+    id: int
+    is_active: bool
+    model_config = ConfigDict(from_attributes=True)
+
+
+
