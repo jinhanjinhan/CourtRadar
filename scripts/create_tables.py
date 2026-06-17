@@ -7,14 +7,12 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-SRC = ROOT / "src"
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
 
-if str(SRC) not in sys.path:
-    sys.path.insert(0, str(SRC))
-
-from courtradar.db.base import Base
-from courtradar.core.config import settings
-import courtradar.db.models  # noqa: F401  # ensure model classes are registered
+from app.db.base import Base
+from app.core.config import settings
+import app.db.models  # noqa: F401  # ensure model classes are registered
 from sqlalchemy.ext.asyncio import create_async_engine
 
 
