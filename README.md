@@ -43,19 +43,19 @@ CourtRadar bridges the gap between buyers and sellers through a three-phase pipe
 ## 🧱 Current Backend Starter
 The Python backend now gives you the first working slice of the system:
 
-* `src/courtradar/main.py` creates the FastAPI app and mounts the API router.
-* `src/courtradar/api/routes.py` exposes starter endpoints for health, users, alert preferences, parsed listings, and listing matches.
-* `src/courtradar/db/models.py` defines the current SQLAlchemy models for `users`, `alert_preferences`, and `parsed_listings`.
-* `src/courtradar/services/matching/engine.py` contains the first matching rule function that compares a parsed listing against an alert preference.
+* `app/main.py` creates the FastAPI app and mounts the API router.
+* `app/api.py` exposes starter endpoints for health, users, alert preferences, parsed listings, and listing matches.
+* `app/db/models.py` defines the current SQLAlchemy models for `users`, `alert_preferences`, and `parsed_listings`.
+* `app/services/matching/engine.py` contains the first matching rule function that compares a parsed listing against an alert preference.
 
 This is intentionally the smallest useful backend foundation. It is not the full product yet; it is the base you can extend into ingestion, parsing, notification dispatch, and proper persistence.
 
 ## 🗂️ Repository Layout
-* `src/courtradar/api` - HTTP routes and request dependencies.
-* `src/courtradar/core` - app configuration and environment settings.
-* `src/courtradar/db` - SQLAlchemy base, models, and async session helpers.
-* `src/courtradar/schemas` - Pydantic request and response schemas.
-* `src/courtradar/services` - business logic split by concern.
+* `app/modules` - HTTP routes, repositories, services, and module-local schemas.
+* `app/core` - app configuration and environment settings.
+* `app/db` - SQLAlchemy base, models, and async session helpers.
+* `app/schemas` - Pydantic request and response schemas.
+* `app/services` - shared business logic split by concern.
 * `tests` - smoke tests and future unit/integration tests.
 
 ## ▶️ How To Start The Backend
@@ -70,12 +70,9 @@ The project uses a plain virtualenv, so startup should stay simple.
 4. Install the project so the `courtradar` package is importable:
   `pip install .`
 5. Run the app in development mode from the `src` directory:
-  `python -m uvicorn --app-dir src courtradar.main:app --reload`
+  `python -m uvicorn app.main:app --reload`
 
-If you want to use the installed package path instead, this also works after step 4:
-`python -m uvicorn courtradar.main:app --reload`
-
-If you do not want to install the package, keep the `--app-dir src` flag. That is the safest command for this repo during development.
+If you do not want to install the package, the repo root already works because `app/` is now at the top level.
 
 ## 🗃️ Manual Table Creation
 
