@@ -1,1 +1,0 @@
-"""CourtRadar application package."""
