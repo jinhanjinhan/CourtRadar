@@ -1,0 +1,1 @@
+"""CourtRadar backend application package."""
