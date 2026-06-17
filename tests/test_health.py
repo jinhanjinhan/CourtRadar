@@ -1,6 +1,6 @@
 from fastapi.testclient import TestClient
 
-from courtradar.main import app
+from app.main import app
 
 
 def test_health_check() -> None:
