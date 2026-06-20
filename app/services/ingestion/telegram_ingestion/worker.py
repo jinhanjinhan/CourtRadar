@@ -30,10 +30,26 @@ def get_source_groups() -> list[str | int]:
 source_groups = get_source_groups()
 
 
-@client.on(events.NewMessage(chats=source_groups if source_groups else None))
+@client.on(events.NewMessage(chats=source_groups))
 async def handle_new_message(event):
+    message = event.message
+
+    print("=" * 80)
+    print("chat_id:", message.chat_id)
+    print("message_id:", message.id)
+    print("text:", message.message)
+
+    print("reply_to:", message.reply_to)
+
+    if message.reply_to:
+        print("reply_to_msg_id:", message.reply_to.reply_to_msg_id)
+        print("reply_to_top_id:", getattr(message.reply_to, "reply_to_top_id", None))
+        print("forum_topic:", getattr(message.reply_to, "forum_topic", None))
+
+    print("=" * 80)
     service = TelegramIngestionService()
     await service.ingest_event(event)
+
 
 
 async def main():
