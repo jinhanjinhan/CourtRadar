@@ -11,13 +11,21 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 
-def get_source_groups() -> list[str]:
-    return [
-        group.strip()
-        for group in settings.telegram_source_groups.split(",")
-        if group.strip()
-    ]
+def get_source_groups() -> list[str | int]:
+    groups = []
 
+    for raw_group in settings.telegram_source_groups.split(","):
+        group = raw_group.strip()
+
+        if not group:
+            continue
+
+        if group.lstrip("-").isdigit():
+            groups.append(int(group))
+        else:
+            groups.append(group)
+
+    return groups
 
 source_groups = get_source_groups()
 
