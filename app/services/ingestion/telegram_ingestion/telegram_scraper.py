@@ -1,0 +1,1 @@
+"""Placeholder Telegram ingestion worker."""
