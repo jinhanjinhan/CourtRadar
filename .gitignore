@@ -30,3 +30,7 @@ site/
 
 # Tooling caches
 .cache/
+
+# Telegram session data
+*.session
+*.session-journal
