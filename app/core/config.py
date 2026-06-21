@@ -19,7 +19,12 @@ class Settings(BaseSettings):
     telegram_api_id: Optional[int] = None
     telegram_api_hash: Optional[str] = None
     telegram_bot_token: Optional[str] = None
-    telegram_source_groups: Optional[str] = ""
+    sg_badminton_group_one_id: Optional[int] = None
+    sg_badminton_group_two_id: Optional[int] = None
+    sg_badminton_group_three_id: Optional[int] = None
+    sg_badminton_group_one_topic_id: Optional[int] = None
+    sg_badminton_group_two_topic_id: Optional[int] = None
+    sg_badminton_group_three_topic_id: Optional[int] = None
     gemini_api_key: Optional[str] = None
     create_tables_on_startup: bool = False
 
