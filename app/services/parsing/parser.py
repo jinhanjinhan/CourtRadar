@@ -1,5 +1,6 @@
 import re
 from dataclasses import dataclass
+from datetime import date as date_cls, time as time_cls
 
 
 @dataclass
@@ -7,6 +8,14 @@ class ParsedCourtTransfer:
     intent: str
     price: float | None
     raw_text: str
+    # Structured slot fields. The current regex parser leaves these as None;
+    # the Gemini parser is responsible for populating them. They feed both the
+    # CourtTransfer row and its dedup fingerprint.
+    venue: str | None = None
+    listing_date: date_cls | None = None
+    start_time: time_cls | None = None
+    end_time: time_cls | None = None
+    court_number: str | None = None
 
 
 class CourtTransferParser:
