@@ -77,6 +77,8 @@ class CourtTransfer(Base):
 
     fingerprint = mapped_column(String, nullable=False, unique=True, index=True)
 
+    seller_id = mapped_column(BigInteger, nullable=True, index=True)
+
     intent = mapped_column(String, nullable=False)
     venue = mapped_column(String, nullable=True)
     date = mapped_column(Date, nullable=True)
