@@ -11,7 +11,7 @@ ENV_FILE = BASE_DIR / ".env"
 class Settings(BaseSettings):
     app_name: str = "CourtRadar"
     app_env: str = "development"
-    api_host: str = "0.0.0.0"
+    api_host: str = "0.0.0.0"  # nosec B104 — intentional default for containerised deployments, overridable via API_HOST
     api_port: int = 8000
 
     database_url: str
