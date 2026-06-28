@@ -31,7 +31,9 @@ async def create_parsed_listing(
 
 
 async def list_parsed_listings(session: AsyncSession) -> list[ParsedListing]:
-    result = await session.execute(select(ParsedListing).order_by(ParsedListing.id.desc()))
+    result = await session.execute(
+        select(ParsedListing).order_by(ParsedListing.id.desc())
+    )
     return list(result.scalars().all())
 
 

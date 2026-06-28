@@ -3,7 +3,11 @@ from unittest.mock import AsyncMock, patch
 
 
 from app.modules.listings.schemas import ParsedListingCreate
-from app.modules.listings.service import create_parsed_listing, get_parsed_listing, list_parsed_listings
+from app.modules.listings.service import (
+    create_parsed_listing,
+    get_parsed_listing,
+    list_parsed_listings,
+)
 from tests.factories import make_listing
 
 
@@ -22,7 +26,8 @@ async def test_create_parsed_listing_success():
     listing = make_listing()
     session = AsyncMock()
     with patch(
-        "app.modules.listings.service.repository.create_parsed_listing", new_callable=AsyncMock
+        "app.modules.listings.service.repository.create_parsed_listing",
+        new_callable=AsyncMock,
     ) as mock_create:
         mock_create.return_value = listing
         result = await create_parsed_listing(session, _LISTING_PAYLOAD)
@@ -34,7 +39,8 @@ async def test_create_parsed_listing_passes_all_fields():
     listing = make_listing()
     session = AsyncMock()
     with patch(
-        "app.modules.listings.service.repository.create_parsed_listing", new_callable=AsyncMock
+        "app.modules.listings.service.repository.create_parsed_listing",
+        new_callable=AsyncMock,
     ) as mock_create:
         mock_create.return_value = listing
         await create_parsed_listing(session, _LISTING_PAYLOAD)
@@ -48,7 +54,8 @@ async def test_list_parsed_listings_returns_all():
     listings = [make_listing(id=1), make_listing(id=2)]
     session = AsyncMock()
     with patch(
-        "app.modules.listings.service.repository.list_parsed_listings", new_callable=AsyncMock
+        "app.modules.listings.service.repository.list_parsed_listings",
+        new_callable=AsyncMock,
     ) as mock_list:
         mock_list.return_value = listings
         result = await list_parsed_listings(session)
@@ -58,7 +65,8 @@ async def test_list_parsed_listings_returns_all():
 async def test_list_parsed_listings_empty():
     session = AsyncMock()
     with patch(
-        "app.modules.listings.service.repository.list_parsed_listings", new_callable=AsyncMock
+        "app.modules.listings.service.repository.list_parsed_listings",
+        new_callable=AsyncMock,
     ) as mock_list:
         mock_list.return_value = []
         result = await list_parsed_listings(session)
@@ -69,7 +77,8 @@ async def test_get_parsed_listing_found():
     listing = make_listing(id=5)
     session = AsyncMock()
     with patch(
-        "app.modules.listings.service.repository.get_parsed_listing", new_callable=AsyncMock
+        "app.modules.listings.service.repository.get_parsed_listing",
+        new_callable=AsyncMock,
     ) as mock_get:
         mock_get.return_value = listing
         result = await get_parsed_listing(session, 5)
@@ -80,7 +89,8 @@ async def test_get_parsed_listing_found():
 async def test_get_parsed_listing_not_found_returns_none():
     session = AsyncMock()
     with patch(
-        "app.modules.listings.service.repository.get_parsed_listing", new_callable=AsyncMock
+        "app.modules.listings.service.repository.get_parsed_listing",
+        new_callable=AsyncMock,
     ) as mock_get:
         mock_get.return_value = None
         result = await get_parsed_listing(session, 999)
@@ -91,7 +101,8 @@ async def test_create_parsed_listing_without_price():
     listing = make_listing(price=None)
     session = AsyncMock()
     with patch(
-        "app.modules.listings.service.repository.create_parsed_listing", new_callable=AsyncMock
+        "app.modules.listings.service.repository.create_parsed_listing",
+        new_callable=AsyncMock,
     ) as mock_create:
         mock_create.return_value = listing
         payload = ParsedListingCreate(

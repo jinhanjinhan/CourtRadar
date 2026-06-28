@@ -28,7 +28,9 @@ async def create_alert_preference(
     return alert
 
 
-async def list_alert_preferences(session: AsyncSession, user_id: Optional[int] = None) -> list[AlertPreference]:
+async def list_alert_preferences(
+    session: AsyncSession, user_id: Optional[int] = None
+) -> list[AlertPreference]:
     query = select(AlertPreference)
     if user_id is not None:
         query = query.where(AlertPreference.user_id == user_id)
@@ -38,6 +40,8 @@ async def list_alert_preferences(session: AsyncSession, user_id: Optional[int] =
 
 async def list_active_alert_preferences(session: AsyncSession) -> list[AlertPreference]:
     result = await session.execute(
-        select(AlertPreference).where(AlertPreference.is_active.is_(True)).order_by(AlertPreference.id.desc())
+        select(AlertPreference)
+        .where(AlertPreference.is_active.is_(True))
+        .order_by(AlertPreference.id.desc())
     )
     return list(result.scalars().all())

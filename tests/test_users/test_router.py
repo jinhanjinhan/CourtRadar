@@ -8,7 +8,9 @@ def test_create_user_success(client):
     user = make_user(id=1, email="new@example.com", display_name="New User")
     with patch("app.modules.users.router.create_user", new_callable=AsyncMock) as mock:
         mock.return_value = user
-        response = client.post("/users", json={"email": "new@example.com", "display_name": "New User"})
+        response = client.post(
+            "/users", json={"email": "new@example.com", "display_name": "New User"}
+        )
     assert response.status_code == 201
     data = response.json()
     assert data["id"] == 1
@@ -18,7 +20,9 @@ def test_create_user_success(client):
 def test_create_user_duplicate_email_returns_409(client):
     with patch("app.modules.users.router.create_user", new_callable=AsyncMock) as mock:
         mock.side_effect = ValueError("email already exists")
-        response = client.post("/users", json={"email": "dup@example.com", "display_name": "User"})
+        response = client.post(
+            "/users", json={"email": "dup@example.com", "display_name": "User"}
+        )
     assert response.status_code == 409
     assert response.json()["detail"] == "email already exists"
 
@@ -26,7 +30,9 @@ def test_create_user_duplicate_email_returns_409(client):
 def test_create_user_other_value_error_returns_400(client):
     with patch("app.modules.users.router.create_user", new_callable=AsyncMock) as mock:
         mock.side_effect = ValueError("some other error")
-        response = client.post("/users", json={"email": "x@example.com", "display_name": "User"})
+        response = client.post(
+            "/users", json={"email": "x@example.com", "display_name": "User"}
+        )
     assert response.status_code == 400
     assert response.json()["detail"] == "some other error"
 
@@ -42,7 +48,11 @@ def test_create_user_with_telegram_chat_id(client):
         mock.return_value = user
         response = client.post(
             "/users",
-            json={"email": "tg@example.com", "display_name": "TG User", "telegram_chat_id": "987654321"},
+            json={
+                "email": "tg@example.com",
+                "display_name": "TG User",
+                "telegram_chat_id": "987654321",
+            },
         )
     assert response.status_code == 201
 

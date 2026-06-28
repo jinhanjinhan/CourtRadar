@@ -5,7 +5,9 @@ from telethon import events
 
 from app.core.config import settings
 from app.db.session import async_session
-from app.services.ingestion.telegram_ingestion.repository import get_last_seen_message_id
+from app.services.ingestion.telegram_ingestion.repository import (
+    get_last_seen_message_id,
+)
 from app.services.ingestion.telegram_ingestion.telegram_client import client
 from app.services.ingestion.telegram_ingestion.service import TelegramIngestionService
 
@@ -13,6 +15,7 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 service = TelegramIngestionService()
+
 
 def topic_set(topic_id: int | None) -> set[int] | None:
     if topic_id is None:
@@ -74,7 +77,6 @@ def should_process_message(chat_id: int, topic_id: int | None) -> bool:
 
     # Chat is configured with specific allowed topics.
     return topic_id in allowed_topics
-
 
 
 @client.on(events.NewMessage(chats=source_groups))

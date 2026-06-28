@@ -63,7 +63,9 @@ class MessageParser:
             return None
 
         intent = detect_intent(text)
-        non_empty = [(i, ln.rstrip()) for i, ln in enumerate(text.splitlines()) if ln.strip()]
+        non_empty = [
+            (i, ln.rstrip()) for i, ln in enumerate(text.splitlines()) if ln.strip()
+        ]
         listings = self._extract_listings(non_empty, intent, text)
 
         return ParsedMessage(raw_text=text, intent=intent, listings=listings)

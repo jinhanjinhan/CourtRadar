@@ -10,7 +10,11 @@ def listing_matches_alert(listing: ParsedListing, alert: AlertPreference) -> boo
     if alert.venue and alert.venue.lower() != listing.venue.lower():
         return False
 
-    if alert.max_price is not None and listing.price is not None and listing.price > alert.max_price:
+    if (
+        alert.max_price is not None
+        and listing.price is not None
+        and listing.price > alert.max_price
+    ):
         return False
 
     if alert.earliest_time and listing.start_time < alert.earliest_time:
