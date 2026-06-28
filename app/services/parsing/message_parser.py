@@ -14,7 +14,7 @@ time token on the same line → inline, otherwise → block.
 from __future__ import annotations
 
 import re
-from datetime import date as date_cls, time as time_cls
+from datetime import date as date_cls
 from typing import Optional
 
 from app.services.parsing.models import CourtListing, ParsedMessage

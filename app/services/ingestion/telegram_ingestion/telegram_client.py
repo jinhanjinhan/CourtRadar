@@ -1,4 +1,4 @@
-from telethon import TelegramClient, events
+from telethon import TelegramClient
 
 from app.core.config import settings
 

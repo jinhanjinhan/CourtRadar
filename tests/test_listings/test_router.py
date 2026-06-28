@@ -1,7 +1,6 @@
 from datetime import time
 from unittest.mock import AsyncMock, MagicMock, patch
 
-import pytest
 
 from tests.factories import make_alert, make_listing
 

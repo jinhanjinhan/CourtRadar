@@ -20,7 +20,7 @@ def topic_set(topic_id: int | None) -> set[int] | None:
     return {topic_id}
 
 
-GROUP_TOPIC_RULES: dict[int, set[int] | None] = {
+_raw_group_rules: dict[int | None, set[int] | None] = {
     settings.sg_badminton_group_one_id: topic_set(
         settings.sg_badminton_group_one_topic_id
     ),
@@ -32,9 +32,9 @@ GROUP_TOPIC_RULES: dict[int, set[int] | None] = {
     ),
 }
 
-GROUP_TOPIC_RULES = {
+GROUP_TOPIC_RULES: dict[int, set[int] | None] = {
     group_id: topic_ids
-    for group_id, topic_ids in GROUP_TOPIC_RULES.items()
+    for group_id, topic_ids in _raw_group_rules.items()
     if group_id is not None
 }
 

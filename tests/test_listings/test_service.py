@@ -1,7 +1,6 @@
 from datetime import time
 from unittest.mock import AsyncMock, patch
 
-import pytest
 
 from app.modules.listings.schemas import ParsedListingCreate
 from app.modules.listings.service import create_parsed_listing, get_parsed_listing, list_parsed_listings

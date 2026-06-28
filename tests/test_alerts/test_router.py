@@ -1,7 +1,6 @@
 from datetime import time
 from unittest.mock import AsyncMock, patch
 
-import pytest
 
 from tests.factories import make_alert
 

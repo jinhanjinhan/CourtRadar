@@ -1,6 +1,5 @@
 from datetime import time
 
-import pytest
 
 from app.services.matching.engine import listing_matches_alert
 from tests.factories import make_alert, make_listing

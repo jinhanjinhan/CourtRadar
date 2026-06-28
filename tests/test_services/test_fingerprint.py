@@ -1,6 +1,5 @@
 from datetime import date, time
 
-import pytest
 
 from app.services.parsing.fingerprint import make_fingerprint
 
