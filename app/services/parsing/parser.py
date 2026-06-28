@@ -2,6 +2,10 @@ import re
 from dataclasses import dataclass
 from datetime import date as date_cls, time as time_cls
 
+# Re-export the new high-level parser so callers can import from this module.
+from app.services.parsing.message_parser import MessageParser  # noqa: F401
+from app.services.parsing.models import CourtListing, ParsedMessage  # noqa: F401
+
 
 @dataclass
 class ParsedCourtTransfer:
@@ -19,6 +23,13 @@ class ParsedCourtTransfer:
 
 
 class CourtTransferParser:
+    """
+    Legacy single-result parser kept for backward compatibility.
+
+    For new code, prefer :class:`~app.services.parsing.message_parser.MessageParser`
+    which returns all listings found in a message.
+    """
+
     SELL_KEYWORDS = ["wts", "sell", "selling", "transfer", "letting go"]
     BUY_KEYWORDS = ["wtb", "buy", "looking for", "lf"]
 
