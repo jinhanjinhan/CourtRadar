@@ -15,6 +15,7 @@ def parser():
 # Helpers
 # ---------------------------------------------------------------------------
 
+
 def _times(listing) -> tuple[time, time]:
     return listing.start_time, listing.end_time
 
@@ -129,7 +130,9 @@ def test_ex2_venues(parser):
 
 def test_ex2_23jun_time(parser):
     listing = next(
-        l for l in parser.parse(EXAMPLE_2).listings if l.listing_date == date(2026, 6, 23)
+        l
+        for l in parser.parse(EXAMPLE_2).listings
+        if l.listing_date == date(2026, 6, 23)
     )
     assert listing.start_time == time(19, 0)
     assert listing.end_time == time(20, 0)
@@ -296,6 +299,7 @@ def test_ex5_venues(parser):
 # ---------------------------------------------------------------------------
 # Edge cases
 # ---------------------------------------------------------------------------
+
 
 def test_empty_string_returns_none(parser):
     assert parser.parse("") is None

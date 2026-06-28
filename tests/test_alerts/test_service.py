@@ -13,7 +13,10 @@ async def test_create_alert_preference_success():
     user = make_user()
     session.get.return_value = user
     alert = make_alert()
-    with patch("app.modules.alerts.service.repository.create_alert_preference", new_callable=AsyncMock) as mock_create:
+    with patch(
+        "app.modules.alerts.service.repository.create_alert_preference",
+        new_callable=AsyncMock,
+    ) as mock_create:
         mock_create.return_value = alert
         result = await create_alert_preference(
             session,
@@ -37,11 +40,16 @@ async def test_create_alert_preference_with_time_constraints():
     session = AsyncMock()
     session.get.return_value = make_user()
     alert = make_alert(earliest_time=time(8, 0), latest_time=time(22, 0))
-    with patch("app.modules.alerts.service.repository.create_alert_preference", new_callable=AsyncMock) as mock_create:
+    with patch(
+        "app.modules.alerts.service.repository.create_alert_preference",
+        new_callable=AsyncMock,
+    ) as mock_create:
         mock_create.return_value = alert
         result = await create_alert_preference(
             session,
-            AlertPreferenceCreate(user_id=1, earliest_time=time(8, 0), latest_time=time(22, 0)),
+            AlertPreferenceCreate(
+                user_id=1, earliest_time=time(8, 0), latest_time=time(22, 0)
+            ),
         )
     assert result.earliest_time == time(8, 0)
     assert result.latest_time == time(22, 0)
@@ -51,7 +59,8 @@ async def test_list_alert_preferences_all():
     session = AsyncMock()
     alerts = [make_alert(id=1), make_alert(id=2)]
     with patch(
-        "app.modules.alerts.service.repository.list_alert_preferences", new_callable=AsyncMock
+        "app.modules.alerts.service.repository.list_alert_preferences",
+        new_callable=AsyncMock,
     ) as mock_list:
         mock_list.return_value = alerts
         result = await list_alert_preferences(session)
@@ -63,7 +72,8 @@ async def test_list_alert_preferences_filtered_by_user():
     session = AsyncMock()
     alerts = [make_alert(id=1, user_id=42)]
     with patch(
-        "app.modules.alerts.service.repository.list_alert_preferences", new_callable=AsyncMock
+        "app.modules.alerts.service.repository.list_alert_preferences",
+        new_callable=AsyncMock,
     ) as mock_list:
         mock_list.return_value = alerts
         result = await list_alert_preferences(session, user_id=42)
@@ -74,7 +84,8 @@ async def test_list_alert_preferences_filtered_by_user():
 async def test_list_alert_preferences_empty():
     session = AsyncMock()
     with patch(
-        "app.modules.alerts.service.repository.list_alert_preferences", new_callable=AsyncMock
+        "app.modules.alerts.service.repository.list_alert_preferences",
+        new_callable=AsyncMock,
     ) as mock_list:
         mock_list.return_value = []
         result = await list_alert_preferences(session)

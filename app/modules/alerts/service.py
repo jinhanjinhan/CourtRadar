@@ -7,7 +7,9 @@ from app.modules.alerts import repository
 from app.modules.alerts.schemas import AlertPreferenceCreate
 
 
-async def create_alert_preference(session: AsyncSession, payload: AlertPreferenceCreate):
+async def create_alert_preference(
+    session: AsyncSession, payload: AlertPreferenceCreate
+):
     user = await session.get(User, payload.user_id)
     if user is None:
         raise ValueError("user not found")

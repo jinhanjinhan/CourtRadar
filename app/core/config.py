@@ -7,10 +7,11 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 BASE_DIR = Path(__file__).resolve().parents[2]
 ENV_FILE = BASE_DIR / ".env"
 
+
 class Settings(BaseSettings):
     app_name: str = "CourtRadar"
     app_env: str = "development"
-    api_host: str = "0.0.0.0"
+    api_host: str = "0.0.0.0"  # nosec B104 — intentional default for containerised deployments, overridable via API_HOST
     api_port: int = 8000
 
     database_url: str
@@ -28,7 +29,9 @@ class Settings(BaseSettings):
     gemini_api_key: Optional[str] = None
     create_tables_on_startup: bool = False
 
-    model_config = SettingsConfigDict(env_file=ENV_FILE, env_file_encoding="utf-8", extra="ignore")
+    model_config = SettingsConfigDict(
+        env_file=ENV_FILE, env_file_encoding="utf-8", extra="ignore"
+    )
 
 
 settings = Settings()

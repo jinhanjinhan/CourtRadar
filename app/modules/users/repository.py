@@ -22,7 +22,9 @@ async def create_user(
     display_name: str,
     telegram_chat_id: Optional[str] = None,
 ) -> User:
-    user = User(email=email, display_name=display_name, telegram_chat_id=telegram_chat_id)
+    user = User(
+        email=email, display_name=display_name, telegram_chat_id=telegram_chat_id
+    )
     session.add(user)
     await session.commit()
     await session.refresh(user)

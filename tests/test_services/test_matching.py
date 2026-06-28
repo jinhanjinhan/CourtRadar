@@ -1,6 +1,5 @@
 from datetime import time
 
-import pytest
 
 from app.services.matching.engine import listing_matches_alert
 from tests.factories import make_alert, make_listing
@@ -115,12 +114,26 @@ def test_none_latest_time_does_not_filter_end_time():
 
 
 def test_all_criteria_satisfied_matches():
-    listing = make_listing(venue="Test Venue", price=15.0, start_time=time(9, 0), end_time=time(11, 0))
-    alert = make_alert(venue="Test Venue", max_price=20.0, earliest_time=time(8, 0), latest_time=time(22, 0))
+    listing = make_listing(
+        venue="Test Venue", price=15.0, start_time=time(9, 0), end_time=time(11, 0)
+    )
+    alert = make_alert(
+        venue="Test Venue",
+        max_price=20.0,
+        earliest_time=time(8, 0),
+        latest_time=time(22, 0),
+    )
     assert listing_matches_alert(listing, alert) is True
 
 
 def test_one_criterion_fails_does_not_match():
-    listing = make_listing(venue="Test Venue", price=15.0, start_time=time(9, 0), end_time=time(11, 0))
-    alert = make_alert(venue="Other Venue", max_price=20.0, earliest_time=time(8, 0), latest_time=time(22, 0))
+    listing = make_listing(
+        venue="Test Venue", price=15.0, start_time=time(9, 0), end_time=time(11, 0)
+    )
+    alert = make_alert(
+        venue="Other Venue",
+        max_price=20.0,
+        earliest_time=time(8, 0),
+        latest_time=time(22, 0),
+    )
     assert listing_matches_alert(listing, alert) is False
